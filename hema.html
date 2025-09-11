@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hemachandran's Digital Portfolio</title>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  :root {
+    --primary-color: #0077b6; /* bright blue */
+    --secondary-color: #00b4d8; /* lighter cyan */
+    --accent-color: #ff6f61; /* coral */
+    --dark-color: #023047;
+    --light-color: #caf0f8;
+    --text-color: #03045e;
+    --bg-gradient: linear-gradient(135deg, #90e0ef, #00b4d8);
+  }
+
+  body {
+    background: var(--light-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    min-height: 100vh;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--accent-color);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--primary-color);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  /* Hamburger for mobile */
+  .hamburger {
+    display: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--primary-color);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--bg-gradient);
+    color: white;
+    padding: 160px 20px 100px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.2);
+  }
+
+  .btn-primary {
+    background: var(--accent-color);
+    color: white;
+    padding: 14px 36px;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+    transition: background 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: #ff4c3b;
+  }
+
+  /* Sections */
+  section {
+    padding: 80px 0;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 50px;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    display: block;
+    margin: 12px auto 0;
+    border-radius: 2px;
+  }
+
+  /* About */
+  .about {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .about-text {
+    flex: 1 1 400px;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--dark-color);
+    margin-bottom: 20px;
+  }
+
+  .about-image {
+    flex: 1 1 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-image img {
+    width: 100%;
+    display: block;
+  }
+
+  /* Skills */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 30px;
+  }
+
+  .skill-card {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+  }
+
+  .skill-card i {
+    font-size: 3.2rem;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+  }
+
+  .skill-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .skill-card p {
+    font-size: 1rem;
+    color: var(--dark-color);
+  }
+
+  /* Projects */
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 30px;
+  }
+
+  .project-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .project-info h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+  }
+
+  .project-info p {
+    flex-grow: 1;
+    color: #444;
+    margin-bottom: 20px;
+  }
+
+  .project-info a.btn-primary {
+    align-self: flex-start;
+  }
+
+  /* Contact */
+  .contact-container {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contact-info {
+    flex: 1 1 320px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    padding: 30px 30px 40px;
+    box-shadow: 0 8px 25px rgba(0, 112, 182, 0.4);
+  }
+
+  .contact-info h3 {
+    margin-bottom: 20px;
+  }
+
+  .contact-info p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  .contact-info i {
+    margin-right: 12px;
+    color: var(--accent-color);
+  }
+
+  .contact-form {
+    flex: 1 1 320px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 1.8px solid #ddd;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+
+  textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+  }
+
+  .social-links a {
+    color: white;
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+  }
+
+  .social-links a:hover {
+    color: var(--accent-color);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .about {
+      flex-direction: column;
+    }
+
+    .contact-container {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    nav .nav-links {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: white;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    nav .nav-links.active {
+      display: flex;
+    }
+
+    .hamburger {
+      display: block;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <a href="#home" class="logo">Hemachandran</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="container">
+    <h1>Hello, I'm Hemachandran</h1>
+    <p>BCA Student | Aspiring Web Developer | Tech Enthusiast</p>
+    <a href="#projects" class="btn-primary">See My Work</a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="container">
+  <h2 class="section-title">About Me</h2>
+  <div class="about">
+    <div class="about-text">
+      <h2>Passionate BCA Student</h2>
+      <p>
+        Hi! I'm Hemachandran, currently pursuing my Bachelor of Computer Applications (BCA). I enjoy
+        learning new technologies, coding, and designing beautiful user experiences.
+      </p>
+      <p>
+        My goal is to become a skilled full-stack developer and contribute to exciting projects.
+        Outside coding, I love exploring tech trends, playing games, and collaborating on open-source.
+      </p>
+      <a href="#contact" class="btn-primary">Contact Me</a>
+    </div>
+    <div class="about-image">
+      <img
+        src="https://th.bing.com/th/id/OIP.KlIwzGCPCzahoAu13UlFTgHaE8?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+        alt="Hemachandran profile"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="container">
+  <h2 class="section-title">My Skills</h2>
+  <div class="skills-container">
+    <div class="skill-card">
+      <i class="fab fa-html5"></i>
+      <h3>HTML5 & CSS3</h3>
+      <p>Building semantic and responsive websites with clean code.</p>
+    </div>
+    <div class="skill-card">
+      <i class="fab fa-js-square"></i>
+      <h3>JavaScript</h3>
+      <p>Interactive front-end development and basic ES6+ concepts.</p>
+    </div>
+    <div class="skill-card">
+      <i class="fab fa-react"></i>
+      <h3>React.js</h3>
+      <p>Creating reusable UI components and managing app state.</p>
+    </div>
+    <div class="skill-card">
+      <i class="fas fa-database"></i>
+      <h3>Database Basics</h3>
+      <p>Experience with MySQL and MongoDB for data management.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="container">
+  <h2 class="section-title">My Projects</h2>
+  <div class="projects-container">
+    <div class="project-card">
+      <div class="project-image">
+        <img
+          src="https://tse1.mm.bing.net/th/id/OIP.XkfGIz6kTBAoKfOkn_4NwwHaFw?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Project 1"
+        />
+      </div>
+      <div class="project-info">
+        <h3>Personal Portfolio Website</h3>
+        <p>A responsive portfolio showcasing my skills and projects, built with React.js and CSS.</p>
+        <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">View Project</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-image">
+        <img
+          src="https://th.bing.com/th/id/OIP.JjKgn8I-tzgpZ1iRNHBHlgHaFy?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Project 2"
+        />
+      </div>
+      <div class="project-info">
+        <h3>To-Do List App</h3>
+        <p>A simple task management app using JavaScript, allowing users to add, edit, and delete tasks.</p>
+        <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">View Project</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-image">
+        <img
+          src="https://tse4.mm.bing.net/th/id/OIP.rqXLnKisC612fNviOn0J3AHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Project 3"
+        />
+      </div>
+      <div class="project-info">
+        <h3>Library Management System</h3>
+        <p>Developed a desktop-based system for managing books and users, using Java and MySQL.</p>
+        <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">View Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="container">
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Contact Info</h3>
+      <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+      <p><i class="fas fa-envelope"></i> hemachandran@example.com</p>
+      <p><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu, India</p>
+      <div class="social-links">
+        <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out!');">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Your Name" required />
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Your Email" required />
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Your Message" required></textarea>
+      </div>
+      <button class="btn-primary" type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Hemachandran. All rights reserved.</p>
+</footer>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
